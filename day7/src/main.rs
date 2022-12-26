@@ -55,7 +55,7 @@ impl TreeNode {
     }
 }
 
-fn main() {
+fn build_tree() -> Rc<RefCell<TreeNode>> {
     let root = Rc::new(RefCell::new(TreeNode {
         name: "/".to_string(),
         children_dirs: BTreeMap::new(),
@@ -118,6 +118,11 @@ fn main() {
         }
     }
     root.borrow_mut().calculate_size();
+    root
+}
+
+fn main() {
+    let root = build_tree();
     dbg!(&root);
 
     // part 1
