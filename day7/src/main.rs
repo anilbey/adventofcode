@@ -20,13 +20,13 @@ impl TreeNode {
         }
     }
 
-    fn calculate_size(&mut self) {
+    fn calculate_sizes(&mut self) {
         let mut size = 0;
         for file in &self.files {
             size += file;
         }
         for child_dir in self.children_dirs.values() {
-            child_dir.borrow_mut().calculate_size();
+            child_dir.borrow_mut().calculate_sizes();
             size += child_dir.borrow().size;
         }
         self.size = size;
@@ -117,7 +117,7 @@ fn build_tree() -> Rc<RefCell<TreeNode>> {
             panic!("Unexpected line");
         }
     }
-    root.borrow_mut().calculate_size();
+    root.borrow_mut().calculate_sizes();
     root
 }
 
